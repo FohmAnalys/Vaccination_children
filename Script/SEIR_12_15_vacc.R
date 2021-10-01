@@ -98,10 +98,10 @@ rm(list = ls(all=TRUE))
 # Input your own path instead of "YOUR_PATH" where folder is located in project.path (end with "/").
 # e.g. project.path 	     <- "C:/Users/Your_Name/Modelling/"
 
-project.path 	    <- "YOUR_PATH"
-data.path         <- paste(project.path, "Data", sep="")
-output.path 	    <- paste(project.path, "Output",sep="")
-script.path 	    <- paste(project.path, "Script",sep="")
+project.path  <- "YOUR_PATH"
+data.path     <- paste(project.path, "Data", sep="")
+output.path   <- paste(project.path, "Output",sep="")
+script.path   <- paste(project.path, "Script",sep="")
 
 
 
