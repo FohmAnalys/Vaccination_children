@@ -98,8 +98,8 @@ rm(list = ls(all=TRUE))
 # Input your own path instead of "YOUR_PATH" where folder is located in project.path (end with "/").
 # e.g. project.path 	     <- "C:/Users/Your_Name/Modelling/"
 
-project.path 	<- "YOUR_PATH"
-data.path 		    <- paste(project.path, "Data", sep="")
+project.path 	    <- "YOUR_PATH"
+data.path         <- paste(project.path, "Data", sep="")
 output.path 	    <- paste(project.path, "Output",sep="")
 script.path 	    <- paste(project.path, "Script",sep="")
 
@@ -131,7 +131,7 @@ incidence_age$Statistikdatum <- as.Date(incidence_age$Statistikdatum,  origin = 
 
 
 
-# Estimated number of reported cases from 03 sept 2021 to 30 sept 2021 from "Scenario 0" in "Löpande modellering - delrapport 5".
+# Estimated number of reported cases from 03 sept 2021 to 30 sept 2021 from "Scenario 0" in "LÃ¶pande modellering - delrapport 5".
 # https://www.folkhalsomyndigheten.se/publicerat-material/publikationsarkiv/s/scenarier-for-fortsatt-spridning--delrapport-5/
 # Scenario 0 is the scenario that best has followed the number of reported cases.
 # The age groups of these estimated number of reported cases are: 0-19, 20-69, and 70+.
@@ -191,6 +191,7 @@ N_20_69 <- 6413764
 #VE two doses
 Vacc_eff    <- 0.7 # 0.950 # 0.7
 Vacc_eff_70 <- 0.7 # 0.894 # 0.7
+
 Vacc_eff_12_15 <- Vacc_eff
 
 # VE one dose (same but then reduced by 'reduction_one_dose')
@@ -238,11 +239,11 @@ p_symp_70    <- 0.7
 # Vacc_eff_w20 symbolise what fraction of vaccinated that developed antibodies after two doses. 
 # Vacc_eff_one_dose_w20 symbolise what fraction of vaccinated that developed antibodies after one dose. 
 
-Vacc_eff_w20 <- 0.95
+Vacc_eff_w20    <- 0.95
 Vacc_eff_w20_70 <- 0.894
 
-Vacc_eff_w20_one_dose <- 0.893 
-Vacc_eff_w20_one_dose_70 <- 0.846
+Vacc_eff_w20_one_dose     <- 0.893 
+Vacc_eff_w20_one_dose_70  <- 0.846
 
 
 #
@@ -454,7 +455,7 @@ Immune_prop  <- c(Imm_w39_0_11,
 
 
 
-# df_immune_susc <- data.frame(Ålder = c(group_names), Proportion_immuna = Immune_prop, Antal_immuna = round(Immune_prop * unname(N_all)), Antal_mottagliga = round((1-Immune_prop) * unname(N_all) ))
+# df_immune_susc <- data.frame(Ã…lder = c(group_names), Proportion_immuna = Immune_prop, Antal_immuna = round(Immune_prop * unname(N_all)), Antal_mottagliga = round((1-Immune_prop) * unname(N_all) ))
 # XL_file_name <- paste(output.path,"/immune_susceptible","_VE_",Vacc_eff*100, ".xlsx", sep ="")
 # 
 #
@@ -707,7 +708,7 @@ vacc_coverage <- function(rate_inv){
   
   
   # states
-  Opt_par <- c()# för infectivity
+  Opt_par <- c()# fÃ¶r infectivity
   t <- 1:365 # time in days
   fit_vacc <- data.frame(ode(y = init_vacc, times = t, func = vacc.model , parms = Opt_par))
   
@@ -769,13 +770,13 @@ t_vacc_days <- as.Date(t,origin="2021-09-30")
 
 ### if you want to Inspect rate of vaccination, uncomment following:
 
-# pdf_file_name <- paste(output.path,"/Täckning_tid_",time_to_vacc_youth,".pdf", sep ="")
+# pdf_file_name <- paste(output.path,"/TÃ¤ckning_tid_",time_to_vacc_youth,".pdf", sep ="")
 # 
 # 
 # pdf(pdf_file_name,width=7, height=6 )
 # 
 plot(t_vacc_days, fit_vacc$V_12_15/N_12_15*100, xlab = "", type = "l", lwd = 2,
-     ylab = "Vaccinationstäckning (%)", main ="Vaccinationstäckning 12-15-åringar",
+     ylab = "VaccinationstÃ¤ckning (%)", main ="VaccinationstÃ¤ckning 12-15-Ã¥ringar",
      ylim = c(0,80), xaxt = 'n')
 
 axis(side = 1, at = as.Date(c("2021-10-01", "2021-11-01", "2021-12-01", "2022-01-01", "2022-02-01","2022-03-01")),
@@ -1053,7 +1054,7 @@ M_res <- matrix(c(res_0_11, res_12_15, res_16_17, res_18_69, res_70),
 df_res <- as.data.frame(M_res)
 
 colnames(df_res) <- c("Utan vaccin", "Med vaccin", "Minskning",  "Minskning procent")
-df_age <- data.frame(Ålder = c(group_names))
+df_age <- data.frame(Ã…lder = c(group_names))
 
 df_res <- cbind(df_age,df_res)
 df_res
@@ -1100,13 +1101,13 @@ M_res_rep <- matrix(c(res_0_11_rep, res_12_15_rep, res_16_17_rep, res_18_69_rep,
 df_res_rep <- as.data.frame(M_res_rep)
 
 colnames(df_res_rep) <- c("Utan vaccin", "Med vaccin", "Minskning",  "Minskning procent")
-df_age <- data.frame(Ålder = c(group_names))
+df_age <- data.frame(Ã…lder = c(group_names))
 
 df_res_rep <- cbind(df_age,df_res_rep)
 df_res_rep
 
-XL_file_name      <- paste(output.path,"/Table_tid_tills_täckning_", time_to_vacc_youth,"_VE_",Vacc_eff*100,"_ökn_kont_",increse_from_aug, ".xlsx", sep ="")
-XL_file_name_rep  <- paste(output.path,"/Reported_Table_tid_tills_täckning_", time_to_vacc_youth,"_VE_",Vacc_eff*100,"_ökn_kont_",increse_from_aug, ".xlsx", sep ="")
+XL_file_name      <- paste(output.path,"/Table_tid_tills_tÃ¤ckning_", time_to_vacc_youth,"_VE_",Vacc_eff*100,"_Ã¶kn_kont_",increse_from_aug, ".xlsx", sep ="")
+XL_file_name_rep  <- paste(output.path,"/Reported_Table_tid_tills_tÃ¤ckning_", time_to_vacc_youth,"_VE_",Vacc_eff*100,"_Ã¶kn_kont_",increse_from_aug, ".xlsx", sep ="")
 
 
 #write.xlsx(df_res, XL_file_name )
@@ -1135,8 +1136,8 @@ col_70    <- "tomato1"
 #
 
 
-pdf_file_name <- paste(output.path,"/Incidence_tid_tills_täckning_", time_to_vacc_youth,"_VE_",Vacc_eff*100,"_ökn_kont_",increse_from_aug,".pdf", sep ="")
-png_file_name <- paste(output.path,"/Incidence_tid_tills_täckning_", time_to_vacc_youth,"_VE_",Vacc_eff*100,"_ökn_kont_",increse_from_aug,".png", sep ="")
+pdf_file_name <- paste(output.path,"/Incidence_tid_tills_tÃ¤ckning_", time_to_vacc_youth,"_VE_",Vacc_eff*100,"_Ã¶kn_kont_",increse_from_aug,".pdf", sep ="")
+png_file_name <- paste(output.path,"/Incidence_tid_tills_tÃ¤ckning_", time_to_vacc_youth,"_VE_",Vacc_eff*100,"_Ã¶kn_kont_",increse_from_aug,".png", sep ="")
 
 
 
@@ -1322,8 +1323,8 @@ legend("topright", legend = c('Ej vaccination', 'Vaccination'), col = c(col_70),
 #--- Figures of reported number of daily cases for each age group
 #
 
-pdf_file_name <- paste(output.path,"/Reported_tid_tills_täckning_", time_to_vacc_youth,"_VE_",Vacc_eff*100,"_ökn_kont_",increse_from_aug,".pdf", sep ="")
-png_file_name <- paste(output.path,"/Reported_tid_tills_täckning_", time_to_vacc_youth,"_VE_",Vacc_eff*100,"_ökn_kont_",increse_from_aug,".png", sep ="")
+pdf_file_name <- paste(output.path,"/Reported_tid_tills_tÃ¤ckning_", time_to_vacc_youth,"_VE_",Vacc_eff*100,"_Ã¶kn_kont_",increse_from_aug,".pdf", sep ="")
+png_file_name <- paste(output.path,"/Reported_tid_tills_tÃ¤ckning_", time_to_vacc_youth,"_VE_",Vacc_eff*100,"_Ã¶kn_kont_",increse_from_aug,".png", sep ="")
 
 
 
